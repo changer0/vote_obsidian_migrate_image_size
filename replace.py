@@ -1,5 +1,6 @@
 import os
 import re
+import sys
 
 # 处理 MD 文件
 def process_md_file(file_path):
@@ -29,9 +30,13 @@ def process_md_file(file_path):
 
 
 def main():
-    # 定义要遍历的目录路径（可以修改）
-    # 待指定目录
-    dir_path = "/Users/lemon/Documents/我的笔记/"
+
+    if len(sys.argv) < 2:
+        print(f"请指定相关目录, 例如: python3 replace.py /xxx/xxx/xx/")
+        return None
+    # 接收指定的目录
+    dir_path = sys.argv[1]
+    print(f"指定的路径是: {dir_path}")
     # 遍历目录下的所有子目录和文件
     for root, dirs, files in os.walk(dir_path):
         for file in files:
