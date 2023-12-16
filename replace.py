@@ -30,15 +30,23 @@ def process_md_file(file_path):
 
 
 def main():
-
+    dir_path = ""
     if len(sys.argv) < 2:
-        print(f"请指定相关目录, 例如: python3 replace.py /xxx/xxx/xx/")
-        return None
-    # 接收指定的目录
-    dir_path = sys.argv[1]
+        # print(f"请指定相关目录, 例如: python3 replace.py /xxx/xxx/xx/")
+        # return None
+        dir_path = input("请指定要处理的相关目录:")
+        if (len(dir_path) <= 0):
+            print("未指定目录, 程序退出!")
+            return
+    else:
+        # 接收指定的目录
+        dir_path = sys.argv[1]    
+
+    # 移除掉前后的 '
+    dir_path = dir_path.strip("'")
     print(f"指定的路径是: {dir_path}")
     # 遍历目录下的所有子目录和文件
-    for root, dirs, files in os.walk(dir_path):
+    for root, dirs, files in os.walk(str(dir_path)):
         for file in files:
             if file.endswith(".md"):
                 # # 获取完整的文件路径
